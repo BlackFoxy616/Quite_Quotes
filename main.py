@@ -1,4 +1,4 @@
-from bark import SAMPLE_RATE, generate_audio, preload_models
+from bark import generate_audio, preload_models
 from IPython.display import Audio
 from scipy.io.wavfile import write as write_wav
 from pyrogram import Client, filters
@@ -34,7 +34,7 @@ app = Client(
 async def start_command(client,message):
       prompt= message.text[7:]
       audio_array = generate_audio(prompt, history="v2/en_speaker_6")
-      write_wav("generation.wav",320, audio_array)
+      write_wav("generation.wav", audio_array)
       await send_audio(message.chat_id,"generation.wav",caption=prompt)
       os.remove("generation.wav")
      
